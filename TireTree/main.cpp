@@ -1,11 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <string>
 #include <iostream>
 #include <windows.h>
 #include "TireTree.h"
+#include "TopHeap.h"
 
+template<class T>
+struct Compare 
+{
+	bool operator()(const T& a , const T& b) const
+	{
+		return a>b ? true : false;
+	}
+};
 
 int init_tire_tree(TireTree*  tree)
 {
@@ -33,6 +43,7 @@ int init_tire_tree(TireTree*  tree)
 
 int main()
 {
+#if 0
 	long  timeStart=GetTickCount();
 	TireTree* tree=new TireTree();
 	
@@ -54,6 +65,9 @@ int main()
 		std::vector<std::string> suggest_list;
 		suggest_list = tree->GetSuggestion(word);
 
+
+
+
 		printf("\n∫Ú—°¥ : \n");
 		for ( int i=0;i <suggest_list.size(); i++ )
 		{
@@ -61,9 +75,33 @@ int main()
 		}
 	}
 
-
-
 	delete tree;
+#endif
+
+#if 1	
+	srand(time(0));
+	TopHeap<int, Compare<int>()>* topHeap=new TopHeap<int,Compare<int>()>();
+	for ( int i=0 ;i< 20; i++ )
+	{
+		int num=rand()%200;
+		topHeap->Add(num);
+	}
+
+
+	//bool ret=Compare<int>()(15,24);
+
+	//topHeap->PrintHeap();
+
+	for ( int i=0; i<20; i++ )
+	{
+		int num=0;
+		topHeap->GetTop(1, &num);
+		printf("%d  ", num);
+	}
+	printf("\n");
+
+#endif
+
 	return 0;
 }
 
