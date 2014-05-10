@@ -4,21 +4,12 @@
 #include <vector>
 
 
-//template<class T>
-//struct Compare 
-//{
-//	bool operator()(const T& a , const T& b) const
-//	{
-//		return a>b ? true : false;
-//	}
-//};
-
 //´ó¶Ñ
-template<class T, class Comp>
+template<class T, class Comparator>
 class TopHeap
 {
 public:
-	TopHeap(void);
+	explicit TopHeap(Comparator comp);
 	~TopHeap(void);
 
 	int    GetTop(int count, T* data);
@@ -38,22 +29,23 @@ private:
 
 	int               m_node_count;
 	std::vector<T> m_array;
+	Comparator  m_compare;
 };
 
-template<class T, class Comp>
-TopHeap<T,Comp>::TopHeap(void)
+template<class T, class Comparator>
+TopHeap<T,Comparator>::TopHeap(Comparator comp):m_compare(comp)
 {
 
 }
 
-template<class T, class Comp>
-TopHeap<T,Comp>::~TopHeap(void)
+template<class T, class Comparator>
+TopHeap<T,Comparator>::~TopHeap(void)
 {
 
 }
 
-template<class T, class Comp>
-int  TopHeap<T,Comp>::GetTop(int count, T* data)
+template<class T, class Comparator>
+int  TopHeap<T,Comparator>::GetTop(int count, T* data)
 {
 	count=count>m_array.size()?m_array.size():count;
 	for ( int i=0 ;i <count; i++ )
@@ -67,15 +59,15 @@ int  TopHeap<T,Comp>::GetTop(int count, T* data)
 	return 0;
 }
 
-template<class T, class Comp>
-void  TopHeap<T,Comp>::Add(T data)
+template<class T, class Comparator>
+void  TopHeap<T,Comparator>::Add(T data)
 {
 	m_array.push_back(data);
 	SiftupNode(m_array.size()-1);
 }
 
-template<class T, class Comp>
-void TopHeap<T,Comp>::PrintHeap()
+template<class T, class Comparator>
+void TopHeap<T,Comparator>::PrintHeap()
 {
 	int  count=0;
 	int  layer=0;
@@ -94,13 +86,13 @@ void TopHeap<T,Comp>::PrintHeap()
 }
 
 
-template<class T, class Comp>
-void TopHeap<T,Comp>::SiftupNode(int index)
+template<class T, class Comparator>
+void TopHeap<T,Comparator>::SiftupNode(int index)
 {
 	int i=index;
 	while ( i>0 )
 	{
-		if ( Comp(m_array[i], m_array[node_parent(i)]) )
+		if ( m_compare(m_array[i], m_array[node_parent(i)]) )
 		{
 			swap_node(i, node_parent(i) );
 		}
@@ -113,8 +105,8 @@ void TopHeap<T,Comp>::SiftupNode(int index)
 
 }
 
-template<class T, class Comp>
-void TopHeap<T,Comp>::SiftdownNode(int index)
+template<class T, class Comparator>
+void TopHeap<T,Comparator>::SiftdownNode(int index)
 {
 	int i=index;
 	int array_count=m_array.size();
@@ -128,8 +120,8 @@ void TopHeap<T,Comp>::SiftdownNode(int index)
 
 		if ( right_child(i)!=0 ) //ÓÒº¢×Ó´æÔÚ
 		{
-			int node=Comp(m_array[left_child(i)],m_array[right_child(i)] )?left_child(i) : right_child(i);
-			if ( Comp(m_array[node] , m_array[i]) )
+			int node=m_compare(m_array[left_child(i)],m_array[right_child(i)] )?left_child(i) : right_child(i);
+			if ( m_compare(m_array[node] , m_array[i]) )
 			{
 				swap_node(i, node);
 				i=node;
@@ -141,22 +133,22 @@ void TopHeap<T,Comp>::SiftdownNode(int index)
 		}
 		else
 		{
-			if ( Comp(m_array[i] , m_array[left_child(i)]) )
+			if ( m_compare(m_array[i] , m_array[left_child(i)]) )
 			{
-				swap_node( i, left_child(i) );
-				i=left_child(i);
+				break;
 			}
 			else
 			{
-				break;
+				swap_node( i, left_child(i) );
+				i=left_child(i);
 			}
 		}
 
 	}
 }
 
-template<class T, class Comp>
-int TopHeap<T,Comp>::left_child(int index)
+template<class T, class Comparator>
+int TopHeap<T,Comparator>::left_child(int index)
 {
 	if ( index*2+1>m_array.size()-1 )
 	{
@@ -165,8 +157,8 @@ int TopHeap<T,Comp>::left_child(int index)
 	return index*2+1;
 }
 
-template<class T, class Comp>
-int TopHeap<T,Comp>::right_child(int index)
+template<class T, class Comparator>
+int TopHeap<T,Comparator>::right_child(int index)
 {
 	if ( (index+1)*2>m_array.size()-1 )
 	{
@@ -175,20 +167,20 @@ int TopHeap<T,Comp>::right_child(int index)
 	return (index+1)*2;
 }
 
-template<class T, class Comp>
-int TopHeap<T,Comp>::node_parent(int index)
+template<class T, class Comparator>
+int TopHeap<T,Comparator>::node_parent(int index)
 {
 	return (index-1)/2;
 }
 
-template<class T, class Comp>
-int  TopHeap<T,Comp>::node_value(int index)
+template<class T, class Comparator>
+int  TopHeap<T,Comparator>::node_value(int index)
 {
 	return m_array[index];
 }
 
-template<class T, class Comp>
-void TopHeap<T,Comp>::swap_node(int index1, int index2)
+template<class T, class Comparator>
+void TopHeap<T,Comparator>::swap_node(int index1, int index2)
 {
 	int temp=m_array[index1];
 	m_array[index1]=m_array[index2];

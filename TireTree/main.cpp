@@ -80,7 +80,8 @@ int main()
 
 #if 1	
 	srand(time(0));
-	TopHeap<int, Compare<int>()>* topHeap=new TopHeap<int,Compare<int>()>();
+	Compare<int> comp;
+	TopHeap<int, Compare<int>>* topHeap=new TopHeap<int,Compare<int>>(comp);
 	for ( int i=0 ;i< 20; i++ )
 	{
 		int num=rand()%200;

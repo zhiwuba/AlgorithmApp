@@ -4,10 +4,10 @@
 
 struct ListNode
 {
-	int           id;
-	void*       data;
-	ListNode* next;
-	ListNode* index;
+	int            node_id;
+	void*        node_data;
+	ListNode* sibling_next;
+	ListNode* level_next;
 };
 
 
@@ -18,13 +18,14 @@ public:
 	SkipList(void);
 	~SkipList(void);
 
-	void  add_data(int id, void* data);
-	void* search_data(int id);
-
-
+	void  add_node(int node_id, void* node_data);
+	void* search_node(int node_id);
+	void  delete_node(int node_id);
+	
 private:
-
-	ListNode*  m_top_node;
+	int  rand_level();
+	ListNode*  create_node(int node_id, void* node_data);
+	ListNode*  m_root_node;
 };
 
 
