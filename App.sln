@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TireTree", "TireTree\TireTree.vcxproj", "{B8EE7F8B-2FE5-43BA-B563-862170F9F3DA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PraseWord", "PraseWord\PraseWord.vcxproj", "{96DC4FBC-63BD-4067-B3C8-B113129D9C5E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParseWord", "PraseWord\PraseWord.vcxproj", "{96DC4FBC-63BD-4067-B3C8-B113129D9C5E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkipList", "SkipList\SkipList.vcxproj", "{DA4D4419-94C2-420D-B11A-2FB916EBCDA3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LocalSearch", "LocalSearch\LocalSearch.vcxproj", "{A3C33900-A595-431A-904C-8241CF225023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,14 @@ Global
 		{96DC4FBC-63BD-4067-B3C8-B113129D9C5E}.Debug|Win32.Build.0 = Debug|Win32
 		{96DC4FBC-63BD-4067-B3C8-B113129D9C5E}.Release|Win32.ActiveCfg = Release|Win32
 		{96DC4FBC-63BD-4067-B3C8-B113129D9C5E}.Release|Win32.Build.0 = Release|Win32
+		{DA4D4419-94C2-420D-B11A-2FB916EBCDA3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DA4D4419-94C2-420D-B11A-2FB916EBCDA3}.Debug|Win32.Build.0 = Debug|Win32
+		{DA4D4419-94C2-420D-B11A-2FB916EBCDA3}.Release|Win32.ActiveCfg = Release|Win32
+		{DA4D4419-94C2-420D-B11A-2FB916EBCDA3}.Release|Win32.Build.0 = Release|Win32
+		{A3C33900-A595-431A-904C-8241CF225023}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A3C33900-A595-431A-904C-8241CF225023}.Debug|Win32.Build.0 = Debug|Win32
+		{A3C33900-A595-431A-904C-8241CF225023}.Release|Win32.ActiveCfg = Release|Win32
+		{A3C33900-A595-431A-904C-8241CF225023}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

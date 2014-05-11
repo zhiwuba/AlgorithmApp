@@ -14,6 +14,7 @@
     <ProjectGuid>{96DC4FBC-63BD-4067-B3C8-B113129D9C5E}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PraseWord</RootNamespace>
+    <ProjectName>ParseWord</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,10 +78,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PraseText.cpp" />
+    <ClCompile Include="ParseText.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PraseText.h" />
+    <ClInclude Include="ParseText.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

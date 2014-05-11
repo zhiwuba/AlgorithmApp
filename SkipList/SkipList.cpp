@@ -17,7 +17,10 @@ SkipList::~SkipList(void)
 
 }
 
+void SkipList::create_list()
+{
 
+}
 
 void  SkipList::add_node(int node_id, void* node_data)
 {
@@ -33,6 +36,7 @@ void  SkipList::add_node(int node_id, void* node_data)
 		ListNode* cur_node=m_root_node->level_next;
 		while (  )
 		{
+
 		}
 	}
 }

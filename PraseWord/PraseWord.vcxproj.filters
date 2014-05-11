@@ -18,12 +18,12 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PraseText.cpp">
+    <ClCompile Include="ParseText.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PraseText.h">
+    <ClInclude Include="ParseText.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
