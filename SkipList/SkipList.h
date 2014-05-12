@@ -1,17 +1,17 @@
+//SkipList的实现 参考如下网址
+//http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html
+
+
 #ifndef  __SKIP_LIST_H__
 #define __SKIP_LIST_H__
 
 
 struct ListNode
 {
-	int            level;
-	int            node_id;
-	void*        node_data;
-	ListNode* sibling_next;
-	ListNode* level_next;
+	int              key;
+	void*          value;
+	ListNode** next;         //一个一维数组
 };
-
-//http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html
 
 class SkipList
 {
@@ -19,17 +19,18 @@ public:
 	SkipList(void);
 	~SkipList(void);
 
-	void  create_list();
-	void  add_node(int node_id, void* node_data);
-	void* search_node(int node_id);
-	void  delete_node(int node_id);
+	bool  add_node(int key, void* value);
+	bool  search_node(int key, void** value);
+	bool  delete_node(int key);
 	
 private:
-	int  rand_level();
-	ListNode*  create_node(int node_id, void* node_data);
+	ListNode*  create_node(int key, void* value, int level);
+	void          create_list();
+	int            rand_level();
 
-	ListNode*  m_root_node;
-
+	ListNode*      m_header;
+	ListNode*      m_nil;
+	unsigned int  m_level;
 };
 
 
