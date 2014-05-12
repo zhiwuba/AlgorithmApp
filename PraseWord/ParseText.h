@@ -3,6 +3,17 @@
 
 #include "SkipList.h"
 
+template<class T>
+class SumChanger
+{
+public:
+	bool operator()(T& dest, T& src)
+	{
+		dest+=src;
+		return true;
+	}
+};
+
 class ParseText
 {
 public:
@@ -17,8 +28,8 @@ private:
 	int get_word_value(const char* word , int length);
 	int filter_utf8_chinese_code(int code);
 
-	SkipList m_skip_list;
-
+	SkipList<int,SumChanger<int>> m_skip_list;
+	SumChanger<int>  m_changer;
 };
 
 #endif

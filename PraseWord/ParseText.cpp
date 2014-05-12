@@ -4,7 +4,7 @@
 #include <string.h>
 #include <assert.h>
 
-ParseText::ParseText()
+ParseText::ParseText():m_skip_list(m_changer)
 {
 
 }
@@ -32,6 +32,7 @@ void print_binary(char c)
 
 int ParseText::load_file(const char* file_path)
 {
+	int l1=0,l2=0;
 	assert(file_path!=NULL);
 	FILE* file=fopen(file_path,"rb");
 	if ( file!=NULL )
@@ -51,15 +52,20 @@ int ParseText::load_file(const char* file_path)
 
 					if ( filter_utf8_chinese_code(code) )
 					{
-						printf("word len:%d code: %d \n", len, code);
+						//printf("word len:%d code: %d \n", len, code);
+						m_skip_list.add_node(code,1);
+						l2++;
 					}
 					pos+=len;
+					l1++;
 				}
 			}
 		}
 
 		fclose(file);
 	}
+
+	m_skip_list.print_node();
 	return 0;
 }
 
@@ -102,15 +108,15 @@ int ParseText::get_utf8_code(const char* word , int length)
 	case 2:
 		b1=*word;
 		b2=*(word+1);
-		*bits=(b2<<6)+(b1&0x3F);
-		*(bits+1)=((b2>>2)&0x3);
+		*bits=(b1<<6)+(b2&0x3F);
+		*(bits+1)=((b1>>2)&0x7);
 		break;
 	case 3:
 		b1=*word ;
 		b2=*(word+1);
 		b3=*(word+2);
-		*bits=(b2<<6)+(b1&0x3F);
-		*(bits+1)=(b3<<4)+((b2>>2)&0xF);
+		*bits=(b2<<6)+(b3&0x3F);
+		*(bits+1)=(b1<<4)+((b2>>2)&0xF);
 		break;
 	case 4:
 		b1=*word ;

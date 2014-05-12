@@ -79,7 +79,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParseText.cpp" />
-    <ClCompile Include="SkipList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ParseText.h" />
