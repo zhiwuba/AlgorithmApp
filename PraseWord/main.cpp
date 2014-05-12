@@ -8,7 +8,7 @@
 int main()
 {
 	ParseText parser;
-	parser.load_file("H:\\Workspace\\AlgorithmApp\\PraseWord\\Debug\\doc.txt");
+	parser.load_file("D:\\Workspace\\App\\PraseWord\\samples\\aa.txt");
 
 	return 0;
 }

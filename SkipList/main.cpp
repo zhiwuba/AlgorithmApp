@@ -4,9 +4,16 @@
 
 #include "SkipList.h"
 
+template<class V>
+class Changer
+{
+public:
+	bool operator();
+};
+
 int main()
 {
-	SkipList skip_list;
+	SkipList<void*> skip_list;
 
 	for ( int i=0; i<100; i++ )
 	{

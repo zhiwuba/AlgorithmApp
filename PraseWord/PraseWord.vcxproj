@@ -79,9 +79,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParseText.cpp" />
+    <ClCompile Include="SkipList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ParseText.h" />
+    <ClInclude Include="SkipList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
