@@ -4,16 +4,10 @@
 
 #include "SkipList.h"
 
-template<class V>
-class Changer
-{
-public:
-	bool operator();
-};
-
 int main()
 {
-	SkipList<void*> skip_list;
+	EqualChanger<char*> changer;
+	SkipList<char*, EqualChanger<char*>> skip_list(changer);
 
 	for ( int i=0; i<100; i++ )
 	{
@@ -22,10 +16,9 @@ int main()
 		skip_list.add_node(i, data);
 	}
 
-	void* data=NULL;
+	char* data=NULL;
 	skip_list.search_node(40,&data);
-	printf(" result:  %s \n", (char*)data);
-
+	printf(" result:  %s \n", data);
 
 	return 0;
 }

@@ -17,6 +17,17 @@ struct ListNode
 	ListNode** next;         //一个一维数组
 };
 
+template<class V>
+class EqualChanger
+{
+public:
+	bool operator()(V& dest,V& src)
+	{
+		dest=src;
+		return true;
+	}
+};
+
 template<class V, class Changer>
 class SkipList
 {
@@ -35,12 +46,12 @@ private:
 
 	ListNode<V>*      m_header;
 	ListNode<V>*      m_nil;
-	Changer               m_changer;
+	Changer               m_changer_func;
 	unsigned int  m_level;
 };
 
 template<class V, class Changer>
-SkipList<V,Changer>::SkipList(Changer changer):m_changer(changer)
+SkipList<V,Changer>::SkipList(Changer changer):m_changer_func(changer)
 {
 	srand(time(0));
 	m_level=0;
@@ -56,7 +67,7 @@ SkipList<V,Changer>::~SkipList(void)
 template<class V,class Changer>
 void SkipList<V,Changer>::create_list()
 {
-	m_nil=new ListNode;
+	m_nil=new ListNode<V>;
 	m_nil->key=0x7fffffff; //int 最大值
 	m_nil->value=0;
 	m_nil->next=0;
@@ -90,7 +101,8 @@ bool  SkipList<V,Changer>::add_node(int key, V data)
 	//已经存在
 	if ( q->key==key )
 	{
-		q->value=data;
+		m_changer_func(q->value, data);
+		//q->value=data;
 		return false;
 	}
 
@@ -187,8 +199,8 @@ ListNode<V>*  SkipList<V,Changer>::create_node(int key, V data, int level)
 {
 	ListNode<V>* node=new ListNode<V>();
 	node->key=key;
-	node->value=data;
-	node->next=new ListNode*[level];
+	m_changer_func(node->value, data);
+	node->next=new ListNode<V>*[level];
 	return node;
 }
 
