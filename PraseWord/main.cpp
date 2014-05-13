@@ -8,7 +8,8 @@
 int main()
 {
 	ParseText parser;
-	parser.load_file("H:\\Workspace\\AlgorithmApp\\PraseWord\\Debug\\doc.txt");
+	parser.load_file_and_stat("D:\\Workspace\\App\\PraseWord\\samples\\fighting_utf8.txt");
+	parser.save_result_to_file("D:\\Workspace\\App\\PraseWord\\samples\\result.txt");
 
 	return 0;
 }

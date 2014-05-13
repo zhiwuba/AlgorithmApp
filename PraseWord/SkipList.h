@@ -9,6 +9,7 @@
 
 const int kMaxLevel=8;
 
+
 template<class V>
 struct ListNode
 {
@@ -28,6 +29,35 @@ public:
 	}
 };
 
+template<class T>
+class SkipListIterator
+{
+public:
+	SkipListIterator(T* value=NULL){ m_value=value; };
+
+	T& operator*() const{return *m_value;};
+	T*  operator->() const{return m_value;};
+
+	SkipListIterator& operator++()
+	{  //前置
+		m_value=m_value->next[0];
+		return *this;
+	}
+	//SkipListIterator& operator++(int)
+	//{  //后置
+	//	T* tmp=m_value;
+	//	m_value=m_value->next[0];
+	//	return *this;
+	//}
+
+	bool operator==(SkipListIterator& other){return m_value->key==other->key; }
+	bool operator!=(SkipListIterator& other){ return m_value->key!=other->key;}
+
+protected:
+	T* m_value;
+};
+
+
 template<class V, class Changer>
 class SkipList
 {
@@ -38,8 +68,10 @@ public:
 	bool  add_node(int key, V value);
 	bool  search_node(int key, V* value);
 	bool  delete_node(int key);
-	void  print_node();
-
+	
+	typedef SkipListIterator<ListNode<V>>  iterator;
+	iterator  begin(){ return m_begin; };
+	iterator  end(){ return m_end; };
 
 private:
 	ListNode<V>*  create_node(int key, V value, int level);
@@ -48,18 +80,22 @@ private:
 
 	ListNode<V>*      m_header;
 	ListNode<V>*      m_nil;
+	
+	iterator m_begin;
+	iterator m_end;
+
 	Changer               m_changer_func;
-	unsigned int  m_list_length;
 	unsigned int  m_level;
 };
 
 template<class V, class Changer>
 SkipList<V,Changer>::SkipList(Changer changer):m_changer_func(changer)
 {
-	m_level=0;
-	m_list_length=0;
 	srand(time(0));
+	m_level=0;
 	create_list();
+	m_begin= m_nil;
+	m_end=m_nil;
 }
 
 template<class V,class Changer>
@@ -119,7 +155,6 @@ bool  SkipList<V,Changer>::add_node(int key, V data)
 	}
 
 	//生成节点
-	m_list_length++;
 	ListNode<V>* node=create_node(key,data,cur_level);
 	for ( ; cur_level>=0 ; --cur_level )
 	{
@@ -127,7 +162,7 @@ bool  SkipList<V,Changer>::add_node(int key, V data)
 		node->next[cur_level]=p->next[cur_level];
 		p->next[cur_level]=node;
 	}
-
+	m_begin=m_header->next[0];
 	return true;
 }
 
@@ -191,22 +226,12 @@ bool  SkipList<V,Changer>::delete_node(int key)
 			cur_level--;
 		}
 		m_level=cur_level;
+		m_begin=m_header->next[0];
 		return true;
 	}
 	else
 	{
 		return false;
-	}
-}
-
-template<class V, class Changer>
-void SkipList<V,Changer>::print_node()
-{
-	ListNode<V>* node=m_header->next[0];
-	while ( node!=m_nil )
-	{
-		printf("%d-----%d \n", node->key, node->value);
-		node=node->next[0];
 	}
 }
 
@@ -223,9 +248,9 @@ ListNode<V>*  SkipList<V,Changer>::create_node(int key, V data, int level)
 template<class V,class Changer>
 int  SkipList<V,Changer>::rand_level()
 {
-	int level=1;
+	int level=0;
 	while( (rand()%2) )level++;
-	level=level>kMaxLevel?kMaxLevel:level;
+	level=level>(kMaxLevel-1)?(kMaxLevel-1):level;
 	return level;
 }
 
