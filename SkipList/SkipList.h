@@ -9,6 +9,7 @@
 
 const int kMaxLevel=8;
 
+
 template<class V>
 struct ListNode
 {
@@ -28,6 +29,35 @@ public:
 	}
 };
 
+template<class T>
+class SkipListIterator
+{
+public:
+	SkipListIterator(T* value=NULL){ m_value=value; };
+
+	T& operator*() const{return *m_value;};
+	T*  operator->() const{return m_value;};
+
+	SkipListIterator& operator++()
+	{  //Ç°ÖÃ
+		m_value=m_value->next[0];
+		return *m_value;
+	}
+	SkipListIterator& operator++(int)
+	{  //ºóÖÃ
+		T* tmp=m_value;
+		m_value=m_value->next[0];
+		return tmp;
+	}
+
+	bool operator==(SkipListIterator& other){return m_value->key==other->key; }
+	bool operator!=(SkipListIterator& other){ return m_value->key!=other->key;}
+
+protected:
+	T* m_value;
+};
+
+
 template<class V, class Changer>
 class SkipList
 {
@@ -39,6 +69,10 @@ public:
 	bool  search_node(int key, V* value);
 	bool  delete_node(int key);
 	
+	typedef SkipListIterator<ListNode<V>>  iterator;
+	iterator  begin(){ return m_begin; };
+	iterator  end(){ return m_end; };
+
 private:
 	ListNode<V>*  create_node(int key, V value, int level);
 	void          create_list();
@@ -46,6 +80,10 @@ private:
 
 	ListNode<V>*      m_header;
 	ListNode<V>*      m_nil;
+	
+	iterator m_begin;
+	iterator m_end;
+
 	Changer               m_changer_func;
 	unsigned int  m_level;
 };
@@ -56,6 +94,8 @@ SkipList<V,Changer>::SkipList(Changer changer):m_changer_func(changer)
 	srand(time(0));
 	m_level=0;
 	create_list();
+	m_begin= m_header->next[0];
+	m_end=m_nil;
 }
 
 template<class V,class Changer>
