@@ -12,7 +12,19 @@ ParseText::~ParseText()
 
 }
 
-int ParseText::load_file_and_stat(const char* file_path)
+
+///////////////////////////////////////////////////////////////
+ParseUTF8Text::ParseUTF8Text()
+{
+
+}
+
+ParseUTF8Text::~ParseUTF8Text()
+{
+
+}
+
+int ParseUTF8Text::load_file_and_stat( const char* file_path )
 {
 	assert(file_path!=NULL);
 	FILE* file=fopen(file_path,"rb");
@@ -47,7 +59,7 @@ int ParseText::load_file_and_stat(const char* file_path)
 	}
 }
 
-int ParseText::save_result_to_file( const char* file_path )
+int ParseUTF8Text::save_result_to_file( const char* file_path )
 {
 	assert(file_path!=NULL);
 	FILE* file=fopen(file_path,"wb");
@@ -69,5 +81,49 @@ int ParseText::save_result_to_file( const char* file_path )
 		fclose(file);
 	}
 
+	return 0;
+}
+
+///////////////////////////////////////////////////////////////
+ParseGBKText::ParseGBKText()
+{
+
+}
+
+ParseGBKText::~ParseGBKText()
+{
+
+}
+
+int ParseGBKText::load_file_and_stat( const char* file_path )
+{
+	return 0;
+}
+
+int ParseGBKText::save_result_to_file( const char* file_path )
+{
+	return 0;
+}
+
+///////////////////////////////////////////////////////////////
+ParseEnglishText::ParseEnglishText()
+{
+
+}
+
+ParseEnglishText::~ParseEnglishText()
+{
+
+}
+
+int ParseEnglishText::load_file_and_stat( const char* file_path )
+{
+
+
+	return 0;
+}
+
+int ParseEnglishText::save_result_to_file( const char* file_path )
+{
 	return 0;
 }

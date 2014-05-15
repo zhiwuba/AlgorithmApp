@@ -14,19 +14,60 @@ public:
 	}
 };
 
+
 class ParseText
 {
 public:
 	ParseText();
-	~ParseText();
+	virtual ~ParseText();
 
-	int load_file_and_stat(const char* file_path);
+	virtual int load_file_and_stat(const char* file_path)=0;
 
-	int save_result_to_file(const char* file_path);
+	virtual int save_result_to_file(const char* file_path)=0;
 
-private:
+protected:
 	SkipList<int,SumChanger<int>> m_skip_list;
 	SumChanger<int>  m_changer;
 };
+
+
+class ParseUTF8Text:public ParseText
+{
+public:
+	ParseUTF8Text();
+	virtual ~ParseUTF8Text();
+
+	virtual int load_file_and_stat(const char* file_path);
+
+	virtual int save_result_to_file(const char* file_path);
+
+};
+
+
+class ParseGBKText:public ParseText
+{
+public:
+	ParseGBKText();
+	virtual ~ParseGBKText();
+
+	virtual int load_file_and_stat(const char* file_path);
+
+	virtual int save_result_to_file(const char* file_path);
+
+};
+
+
+class ParseEnglishText:public ParseText
+{
+public:
+	ParseEnglishText();
+	virtual ~ParseEnglishText();
+
+	virtual int load_file_and_stat(const char* file_path);
+
+	virtual int save_result_to_file(const char* file_path);
+
+};
+
 
 #endif

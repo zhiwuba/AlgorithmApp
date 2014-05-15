@@ -7,12 +7,17 @@
 
 int main()
 {
+	ParseText* parser=new ParseUTF8Text();
+
+	
 	long start_time=GetTickCount();
-	ParseText parser;
-	parser.load_file_and_stat("D:\\Workspace\\App\\PraseWord\\samples\\ghost_utf8.txt");
-	parser.save_result_to_file("D:\\Workspace\\App\\PraseWord\\samples\\result.txt");
+	parser->load_file_and_stat("D:\\Workspace\\App\\PraseWord\\samples\\ghost_utf8.txt");
+	parser->save_result_to_file("D:\\Workspace\\App\\PraseWord\\samples\\result.txt");
 	long cost_time=GetTickCount()-start_time;
 	printf("cost time is :%ld ms", cost_time);
+
+
+	delete parser;
 	return 0;
 }
 

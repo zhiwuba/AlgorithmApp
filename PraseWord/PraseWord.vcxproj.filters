@@ -24,6 +24,9 @@
     <ClCompile Include="UTF8.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GBK.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ParseText.h">
@@ -33,6 +36,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="UTF8.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GBK.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

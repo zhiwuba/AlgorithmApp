@@ -51,7 +51,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -78,6 +78,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Commmon.cpp" />
+    <ClCompile Include="FileMD5.cpp" />
+    <ClCompile Include="CrawlData.cpp" />
+    <ClCompile Include="ForwardIndex.cpp" />
+    <ClCompile Include="InvertedIndex.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParseDocument.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Commmon.h" />
+    <ClInclude Include="FileMD5.h" />
+    <ClInclude Include="CrawlData.h" />
+    <ClInclude Include="ForwardIndex.h" />
+    <ClInclude Include="InvertedIndex.h" />
+    <ClInclude Include="ParseDocument.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

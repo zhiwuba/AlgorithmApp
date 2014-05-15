@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/*
---本app功能  用关键词 检索本地的可读文本 
---先做一个简单的倒排表 提供简单的搜索
-*/
+#include <windows.h>
+#include "ParseDocument.h"
+#include "CrawlData.h"
 
 int main()
 {
+	CrawlData crawler;
+	crawler.traverse_directory("D:\\Workspace\\App\\*.*");
 
+	long startTime=GetTickCount();
+	ParseDocument parser;
+	parser.Parse("D:\\Workspace\\MySqlite\\sqlite3.h");
+	long timeCost=GetTickCount()-startTime;
+	printf("cost time : %d \n", timeCost);
 	return 0;
 }
 
