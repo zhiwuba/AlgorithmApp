@@ -1,46 +1,84 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include <assert.h>
-#include <list>
-#include <algorithm>
-
-#include "search_db.h"
-
-using std::swap;
-using std::binary_search;
-using std::lower_bound;
-using std::upper_bound;
 
 
+#include "bp_tree.h"
 
-int Search_DB::bp_tree_search(int key, Value* value )
+/*    Features
+**  B+Tree 为前开后闭
+**
+**
+**/
+
+BP_Tree::BP_Tree()
 {
-	return 0;
+
 }
 
-int Search_DB::bp_tree_insert( int key, Value* value )
+BP_Tree::~BP_Tree()
 {
 
-
-	return 0;
 }
 
 
-InnerNode* Search_DB::search_index(int key)
-{   //在所有inner节点里查找
-	off_t root=m_bp_meta->root_offset;
-	int height=m_bp_meta->height;
+int BP_Tree::insert(int key, Value* value)
+{
+	Node* parent=search_index(key);
+	Node* leaf=search_leaf(parent,key);
+
+
+
+	return 0;
+}
+
+
+
+int BP_Tree::init_meta()
+{
+	m_meta=new Meta;
+	m_meta->degree=20;
+	m_meta->height=1;
+
+	m_meta->inner_node_num=0;
+	m_meta->leaf_node_num=0;
+	m_meta->key_size=0;
+	m_meta->value_size=0;
+
+	m_meta->root=create_node();
+
+	return 0;
+}
+
+Node* BP_Tree::search_index(int key)
+{
+	int height=m_meta->height;
+	Node* node=m_meta->root;
 	while ( height>1 )
 	{
-		InnerNode node;
-		map(&node, root);
-
-		int r=upper_bound(node.children, node.count, key);
-		Index_t *i=node.children[i];
-
-		height--;
+		int i=lower_bound(node->node_record, node->count, key);
+		node=node->children_node[i];
+		--height;
 	}
+	return node;
+}
 
-	return 0;
+
+Node* BP_Tree::search_leaf(Node* parent, int key)
+{
+	int i=lower_bound( parent->node_record, parent->count, key);
+	Node* node=parent->children_node[i];
+	return node;
+}
+
+Node* BP_Tree::create_node()
+{
+	Node* node=new Node;
+	node->count=0;
+	node->Parent=NULL;
+	node->node_record=NULL;
+	node->children_node=NULL;
+
+	return node;
 }
 
 
@@ -115,5 +153,4 @@ int Search_DB::upper_bound(T* nodes, int count, int key)
 	}
 	return end;
 }
-
 

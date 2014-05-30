@@ -4,7 +4,6 @@
 #ifndef  __SEARCH_DB_H__
 #define __SEARCH_DB_H__
 
-#include "search_util.h"
 
 struct Value
 {
@@ -15,7 +14,7 @@ struct Value
 struct Index_t
 {
 	int    key;
-	long child;
+	off_t child;
 };
 
 struct Record_t
@@ -26,16 +25,22 @@ struct Record_t
 
 struct InnerNode
 {
-	InnerNode* parent;
-	Index_t*      children;
+	off_t parent;
+	off_t prev;
+	off_t next;
+
 	int              count;
+	Index_t*      children;
 };
 
 struct LeafNode
 {
-	InnerNode* parent;
-	Record_t*    children;
+	off_t  prev;
+	off_t  next;
+	off_t  parent;
+
 	int              count;
+	Record_t*    children;
 };
 
 struct Meta
@@ -47,9 +52,8 @@ struct Meta
 
 	int key_size;
 	int value_size;
-
-	InnerNode* root;
-
+	
+	long slot;
 	long root_offset;
 	long leaf_offset;
 };
@@ -70,14 +74,23 @@ protected:
 
 
 private:
-	template<class T>
-	void binary_search(T* nodes,int count, int key);
-	void lower_bound();
-	void upper_bound();
-	
-	Meta*             m_bp_tree;
-	std::string        m_db_path;
 
+	
+	Meta*             m_bp_meta;
+	std::string        m_db_path;
+	FILE*               m_db_file;
+
+private:
+	off_t alloc(InnerNode* node);
+	off_t alloc(LeafNode* node);
+
+
+	template<class T>
+	int binary_search(T* nodes,int count, int key);
+	template<class T>
+	int lower_bound(T* nodes, int count, int key);
+	template<class T>
+	int upper_bound(T* nodes, int count, int key);
 };
 
 #endif
