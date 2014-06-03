@@ -10,21 +10,20 @@ struct Value
 	void* value;
 };
 
-struct Record
-{
-	int       key;
-	Value* value;
-};
 
 struct Node
 {
 	Node*    parent;
-	int          count;
-	bool       is_leaf;
 
-	std::vector<Node*>   children_node;  //孩子节点
-	std::vector<Record*> node_record;    //本节点的数据  value可能为空
+	bool       is_leaf;
+	int          key;
+	Value*    value;     //节点的数据 非叶子节点为空
+
+	int          count;
+	std::vector<Node*>   children;
 };
+
+
 
 struct Meta
 {
@@ -49,20 +48,31 @@ public:
 
 	int  init_meta();
 	int  insert(int key, Value* value);
+	int  search(int key, Value* value);
+	int  update(int key, Value* value);
+	int  remove(int key);
+
+	void print_tree(Node* root);
+	
+	Meta*  m_meta;
 
 private:
 	Node* create_node(Node* parent, bool is_leaf);
 	Node* search_node(int key);
 	Node* search_leaf(Node* parent, int key);
 
-	Meta*  m_meta;
+
 
 private:
 
 	int insert_to_leaf_no_split(Node* leaf, int key, Value* value);
-	int insert_to_index(Node* node, int key);
-	int insert_to_index_no_split(Node* index, int key);
+	int insert_to_index(Node* parent, Node* new_node);
+	int insert_to_index_no_split(Node* parent, Node* new_node);
 	int reset_index_children_parent(Node* node);
+
+	Node* get_sibling_node(Node* node, bool left);
+	bool borrow_node(Node* lender, Node* borrower);
+	bool merge_node(Node* from, Node* to);
 };
 
 

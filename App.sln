@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkipList", "SkipList\SkipLi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LocalSearch", "LocalSearch\LocalSearch.vcxproj", "{A3C33900-A595-431A-904C-8241CF225023}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BPTreeDB", "BPTreeDB\BPTreeDB.vcxproj", "{DF5731BA-E861-4890-8E1D-C97B6279770F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BPTreeDB", "BPTreeDB\BPTreeDB.vcxproj", "{76F12359-FF80-40C7-BBE7-CE0886F96465}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{A3C33900-A595-431A-904C-8241CF225023}.Debug|Win32.Build.0 = Debug|Win32
 		{A3C33900-A595-431A-904C-8241CF225023}.Release|Win32.ActiveCfg = Release|Win32
 		{A3C33900-A595-431A-904C-8241CF225023}.Release|Win32.Build.0 = Release|Win32
-		{DF5731BA-E861-4890-8E1D-C97B6279770F}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DF5731BA-E861-4890-8E1D-C97B6279770F}.Debug|Win32.Build.0 = Debug|Win32
-		{DF5731BA-E861-4890-8E1D-C97B6279770F}.Release|Win32.ActiveCfg = Release|Win32
-		{DF5731BA-E861-4890-8E1D-C97B6279770F}.Release|Win32.Build.0 = Release|Win32
+		{76F12359-FF80-40C7-BBE7-CE0886F96465}.Debug|Win32.ActiveCfg = Debug|Win32
+		{76F12359-FF80-40C7-BBE7-CE0886F96465}.Debug|Win32.Build.0 = Debug|Win32
+		{76F12359-FF80-40C7-BBE7-CE0886F96465}.Release|Win32.ActiveCfg = Release|Win32
+		{76F12359-FF80-40C7-BBE7-CE0886F96465}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
