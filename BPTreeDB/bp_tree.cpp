@@ -50,6 +50,20 @@ void Node::update_link()
 	}
 }
 
+int Node::serialize(FILE* file, long offset )
+{
+
+	offset_=offset;
+	return 0;
+}
+
+int Node::deserialize(FILE* file, long offset )
+{
+
+	offset_=offset;
+	return 0;
+}
+
 
 
 
@@ -160,7 +174,7 @@ int  BP_Tree::remove(int key)
 	leaf->children.erase(delete_iter);
 	//delete (*delete_iter);
 
-	remove_reset_nodes(leaf);
+	reset_nodes_after_remove(leaf);
 
 	return 0;
 }
@@ -360,7 +374,7 @@ bool BP_Tree::merge_node(Node* from, Node* to, bool to_left)
 }
 
 
-bool  BP_Tree::remove_reset_nodes(Node* node)
+bool  BP_Tree::reset_nodes_after_remove(Node* node)
 {
 	if ( node==m_root && node->children.size()==1&&m_height>2 )
 	{   //parent½Úµã
@@ -404,7 +418,7 @@ bool  BP_Tree::remove_reset_nodes(Node* node)
 				node->update_key();
 			}
 
-			remove_reset_nodes(parent);
+			reset_nodes_after_remove(parent);
 		}
 	}
 	else
@@ -412,7 +426,7 @@ bool  BP_Tree::remove_reset_nodes(Node* node)
 		node->key=node->children.back()->key;
 		if ( node->parent!=NULL )
 		{
-			remove_reset_nodes(node->parent);
+			reset_nodes_after_remove(node->parent);
 		}
 	}
 

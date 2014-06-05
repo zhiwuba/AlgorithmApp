@@ -10,7 +10,6 @@ struct Value
 	void* value;
 };
 
-
 class Node
 {
 public:
@@ -21,12 +20,17 @@ public:
 	void  update_key();  /* update self and parent's key */
 	void  update_link();  /* update selef and childrens's link */
 
+	int    serialize(FILE* file, long offset);
+	int    deserialize(FILE* file, long offset);
+
 	Node*    parent;
 	bool       is_leaf;
 	int          key;
 	Value*    value;
-
 	std::vector<Node*>   children;
+
+private:
+	long     offset_;
 };
 
 class BP_Tree
