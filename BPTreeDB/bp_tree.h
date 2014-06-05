@@ -6,7 +6,7 @@
 
 struct Value
 {
-	int     len;   
+	int     len;
 	void* value;
 };
 
@@ -59,7 +59,7 @@ private:
 	Node* get_sibling_node(Node* node, bool left);
 	bool    borrow_node(Node* lender, Node* borrower, bool from_left);
 	bool    merge_node(Node* from, Node* to, bool to_left);
-	bool    remove_reset_nodes(Node* node);
+	bool    reset_nodes_after_remove(Node* node);
 
 	/* print */
 	void    print_level(Node* node, int cur_level ,int level);
