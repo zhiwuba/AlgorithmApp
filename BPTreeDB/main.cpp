@@ -31,13 +31,23 @@ int main()
 	BP_Tree* tree=new BP_Tree;
 	tree->init_meta();
 
-	for ( int i=0 ;i<100; ++i )
+	for ( int i=0 ;i<30; ++i )
 	{
 		tree->insert(i,NULL);
+
+		tree->print_tree();
+		printf("=========================\n");
 	}
-	
-	tree->print_tree(tree->m_meta->root);
+	tree->print_tree();
+
+	printf("\n\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| \n\n");
+
+
+	for ( int i=30; i >=0 ; i-- )
+	{
+		tree->remove(i);
+		tree->print_tree();	
+	}
 
 	return 0;
 }
-

@@ -11,15 +11,24 @@ struct Value
 };
 
 
-struct Node
+class Node
 {
+public:
+	Node()
+	{
+
+	}
+	~Node()
+	{
+		printf("Node~~~~. \n");
+	}
+
 	Node*    parent;
 
 	bool       is_leaf;
 	int          key;
 	Value*    value;     //节点的数据 非叶子节点为空
 
-	int          count;
 	std::vector<Node*>   children;
 };
 
@@ -52,17 +61,14 @@ public:
 	int  update(int key, Value* value);
 	int  remove(int key);
 
-	void print_tree(Node* root);
+	void print_tree();
 	
-	Meta*  m_meta;
-
 private:
 	Node* create_node(Node* parent, bool is_leaf);
 	Node* search_node(int key);
 	Node* search_leaf(Node* parent, int key);
 
-
-
+	Meta*  m_meta;
 private:
 
 	int insert_to_leaf_no_split(Node* leaf, int key, Value* value);
@@ -71,8 +77,11 @@ private:
 	int reset_index_children_parent(Node* node);
 
 	Node* get_sibling_node(Node* node, bool left);
-	bool borrow_node(Node* lender, Node* borrower);
-	bool merge_node(Node* from, Node* to);
+	bool borrow_node(Node* lender, Node* borrower, bool from_left);
+	bool merge_node(Node* from, Node* to, bool to_left);
+	bool reset_parent_index(Node* node);
+
+	void print_level(Node* node, int cur_level ,int level);
 };
 
 
