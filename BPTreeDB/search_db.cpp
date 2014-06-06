@@ -34,7 +34,10 @@ Search_DB::~Search_DB()
 
 int Search_DB::insert(int key, value_t* value)
 {
-	off_t leaf=search_node(key);
+	off_t leaf_offset=search_node(key);
+	Node leaf;
+	
+	map(leaf,)
 
 	if ( leaf->children.size()==m_degree )
 	{   //full

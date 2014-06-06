@@ -76,12 +76,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bp_tree.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="search_db.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bp_tree.h" />
     <ClInclude Include="search_db.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
