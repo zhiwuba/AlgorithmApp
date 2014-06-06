@@ -21,9 +21,15 @@
     <ClCompile Include="bp_tree.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="search_db.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bp_tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="search_db.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
